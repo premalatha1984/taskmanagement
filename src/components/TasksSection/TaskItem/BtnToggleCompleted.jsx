@@ -15,7 +15,7 @@ const BtnToggleCompleted = ({ taskCompleted, taskId, isListInView1 }) => {
       title={taskCompleted ? "mark as uncompleted" : "mark as completed"}
       className={`${
         taskCompleted
-          ? "bg-emerald-200 text-emerald-800 "
+          ? "bg-blue-200 text-blue-800 "
           : "bg-amber-200 text-amber-800 "
       } ${isListInView1 ? "mr-4" : "mr-4 order-0"} rounded-full font-medium`}
       onClick={() => toggleTaskCompleted(taskId)}

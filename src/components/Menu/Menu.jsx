@@ -6,7 +6,7 @@ import NavLinks from "./NavLinks";
 import LayoutMenus from "../Utilities/LayoutMenus";
 
 const classLinkActive =
-  "text-[#009F9F] bg-[#edd5d3] border-r-4 border-[#00B3B2] dark:bg-slate-700/[.2] dark:text-slate-200 dark:border-slate-200";
+  "text-[#009F9F] bg-[#edd5d3] border-r-4 border-[#154dba] dark:bg-slate-700/[.2] dark:text-slate-200 dark:border-slate-200";
 
 const Menu = () => {
   const { state, dispatch } = useContext(MenusContext);

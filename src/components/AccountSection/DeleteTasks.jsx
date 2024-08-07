@@ -22,7 +22,7 @@ const DeleteTasks = () => {
         />
       )}
       <button
-        className="mt-auto text-left pt-4 hover:text-[#00B3B2] dark:hover:text-slate-200 transition "
+        className="mt-auto text-left pt-4 hover:text-[#154dba] dark:hover:text-slate-200 transition "
         onClick={() => setIsModalShown(true)}
       >
         Delete all data

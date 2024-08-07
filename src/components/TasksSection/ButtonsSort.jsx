@@ -19,10 +19,10 @@ const ButtonsSort = ({
   return (
     <div className="flex children-styles">
       <button onClick={() => setIsListInView1(true)} title="view in list">
-        <IconView1 className={isListInView1 ? "text-[#00B3B2]" : ""} />
+        <IconView1 className={isListInView1 ? "text-[#154dba]" : ""} />
       </button>
       <button onClick={() => setIsListInView1(false)} title="view in grid">
-        <IconView2 className={!isListInView1 ? "text-[#00B3B2]" : ""} />
+        <IconView2 className={!isListInView1 ? "text-[#154dba]" : ""} />
       </button>
       <select
         className="ml-auto inputStyles"

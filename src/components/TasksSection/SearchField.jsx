@@ -79,7 +79,7 @@ const SearchField = () => {
                 </ul>
                 <button
                   onClick={navigateToSearchResults}
-                  className="bg-[#00B3B2] hover:bg-[#009F9F] w-full p-2 rounded-md text-slate-200 "
+                  className="bg-[#154dba] hover:bg-[#009F9F] w-full p-2 rounded-md text-slate-200 "
                 >
                   All results for "{searchInputValue}"
                 </button>
