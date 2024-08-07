@@ -79,7 +79,7 @@ const ModalCreateTask = ({ onClose, task, nameForm, onConfirm }) => {
     }
     return state.directories[0];
   });
-
+  const [documentId, setDocumentId] = useState(task.$id || null);
   const addNewTaskHandler = (event) => {
     event.preventDefault();
 
@@ -94,7 +94,7 @@ const ModalCreateTask = ({ onClose, task, nameForm, onConfirm }) => {
         date: date,
         completed: isCompleted,
         important: isImportant,
-        id: task?.id ? task.id : Date.now().toString(),
+        id: task?.$id ? task.$id : Date.now().toString(),
       };
       onConfirm(newTask);
       onClose();

@@ -8,6 +8,7 @@ const databases = new Databases(client);
 const fetchTasksFromAppwrite = async () => {
   try {
     const response = await databases.listDocuments('0123456789', '66b3022a002781997f95');
+    console.log('Fetched tasks:', response.documents); 
     return response.documents;
   } catch (error) {
     console.error('Failed to fetch tasks from Appwrite', error);
