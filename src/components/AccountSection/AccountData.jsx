@@ -44,7 +44,7 @@ const AccountData = () => {
           href="https://github.com/rohit4242"
           className="mt-4 bg-[#00B3B2] p-2 rounded-md text-center transition hover:bg-[#009F9F] text-slate-200"
         >
-          Made by Rohit Luni
+          Made by VAPRAS
         </a>
       </section>
     </LayoutMenus>
