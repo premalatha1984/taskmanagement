@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import ModalEditTask from "../../Utilities/ModalTask";
+import ModalCreateTask from "../../Utilities/ModalTask";
 import { ReactComponent as OptionsSvg } from "../../../assets/options.svg";
 import { TasksContext } from "../../../Context/Tasks/TasksContext";
 import { Client, Databases, Account } from 'appwrite';
@@ -101,7 +101,7 @@ const BtnEditTask = ({ task }) => {
         <OptionsSvg className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
       {modalEditTaskOpen && (
-        <ModalEditTask
+        <ModalCreateTask
           onClose={closeModalEditTask}
           task={task}
           nameForm="Edit task"
