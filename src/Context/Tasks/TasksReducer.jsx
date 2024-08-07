@@ -1,3 +1,20 @@
+import { Client, Databases } from 'appwrite';
+
+const client = new Client();
+client.setEndpoint('https://cloud.appwrite.io/v1').setProject('66b2fdf6002701068fd1');
+
+const databases = new Databases(client);
+
+const fetchTasksFromAppwrite = async () => {
+  try {
+    const response = await databases.listDocuments('0123456789', '66b3022a002781997f95');
+    return response.documents;
+  } catch (error) {
+    console.error('Failed to fetch tasks from Appwrite', error);
+    return [];
+  }
+};
+
 const defaultTasks = [
   {
     title: "Task 1",
@@ -56,22 +73,22 @@ const getSavedDirectories = () => {
 };
 
 const initialState = {
-  tasks: localStorage.getItem("tasks")
-    ? JSON.parse(localStorage.getItem("tasks"))
-    : defaultTasks,
+  tasks: [],
   directories: getSavedDirectories(),
 };
 
 const tasksReducer = (state, action) => {
   switch (action.type) {
-    case "ADD_NEW_TASK":
+    case 'SET_TASKS':
+      return { ...state, tasks: action.payload };
+    case 'ADD_NEW_TASK':
       return { ...state, tasks: [action.payload, ...state.tasks] };
-    case "REMOVE_TASK":
+    case 'REMOVE_TASK':
       const newTasksList1 = state.tasks.filter(
         (task) => task.id !== action.payload
       );
       return { ...state, tasks: newTasksList1 };
-    case "MARK_AS_IMPORTANT":
+    case 'MARK_AS_IMPORTANT':
       const newTasksImportant = state.tasks.map((task) => {
         if (task.id === action.payload) {
           return { ...task, important: !task.important };
@@ -79,7 +96,7 @@ const tasksReducer = (state, action) => {
         return task;
       });
       return { ...state, tasks: newTasksImportant };
-    case "EDIT_TASK":
+    case 'EDIT_TASK':
       const newTasksEdited = state.tasks.map((task) => {
         if (task.id === action.payload.id) {
           return action.payload;
@@ -87,7 +104,7 @@ const tasksReducer = (state, action) => {
         return task;
       });
       return { ...state, tasks: newTasksEdited };
-    case "TOGGLE_TASK_COMPLETED":
+    case 'TOGGLE_TASK_COMPLETED':
       const newTasksCompleted = state.tasks.map((task) => {
         if (task.id === action.payload) {
           return { ...task, completed: !task.completed };
@@ -95,18 +112,18 @@ const tasksReducer = (state, action) => {
         return task;
       });
       return { ...state, tasks: newTasksCompleted };
-    case "DELETE_ALL_DATA":
-      return { tasks: [], directories: ["Main"] };
-    case "CREATE_DIRECTORY":
+    case 'DELETE_ALL_DATA':
+      return { tasks: [], directories: ['Main'] };
+    case 'CREATE_DIRECTORY':
       const directoryAlreadyExists = state.directories.includes(action.payload);
       if (directoryAlreadyExists) return state;
       return { ...state, directories: [action.payload, ...state.directories] };
-    case "DELETE_DIRECTORY":
+    case 'DELETE_DIRECTORY':
       const dirName = action.payload;
       const newDirectories = state.directories.filter((dir) => dir !== dirName);
       const newTasks = state.tasks.filter((task) => task.dir !== dirName);
       return { ...state, directories: newDirectories, tasks: newTasks };
-    case "EDIT_DIRECTORY_NAME":
+    case 'EDIT_DIRECTORY_NAME':
       const { newDirName, previousDirName } = action.payload;
       const directoryExists = state.directories.includes(newDirName);
       if (directoryExists) return state;
@@ -131,5 +148,13 @@ const tasksReducer = (state, action) => {
       return state;
   }
 };
+
+// Asynchronously fetch tasks from Appwrite and update the initial state
+const initializeState = async () => {
+  const fetchedTasks = await fetchTasksFromAppwrite();
+  initialState.tasks = fetchedTasks.length ? fetchedTasks : defaultTasks;
+};
+
+initializeState();
 
 export { initialState, tasksReducer };
